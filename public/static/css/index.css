@@ -1,0 +1,74 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif; }
+  body p {
+    font-size: 16px; }
+  body i {
+    font-size: 30px; }
+  body header {
+    border-bottom: #fdc552 1px solid;
+    display: flex;
+    margin-bottom: 3em; }
+    body header h2 {
+      color: #fdc552;
+      margin-left: 1.5em;
+      font-size: 30px; }
+    body header div {
+      margin-left: auto;
+      display: flex; }
+      body header div a {
+        display: flex;
+        text-decoration: none;
+        margin: auto 0; }
+        body header div a i {
+          color: #fdc552; }
+        body header div a:last-of-type {
+          margin: auto 1.5em; }
+  body main {
+    display: flex; }
+    body main > section {
+      margin: 0 auto;
+      width: 80%;
+      display: flex; }
+      body main > section > div {
+        height: 100%; }
+        body main > section > div:first-of-type {
+          width: 25%; }
+          body main > section > div:first-of-type img {
+            width: 100%;
+            border-radius: 10px; }
+        body main > section > div:last-of-type {
+          width: 65%;
+          margin-left: auto; }
+          body main > section > div:last-of-type h2 {
+            color: #fdc552;
+            margin: 0;
+            padding-bottom: .3em;
+            font-size: 30px;
+            width: 100%;
+            border-bottom: 0.3px solid rgba(96, 96, 96, 0.5); }
+          body main > section > div:last-of-type > div {
+            display: flex;
+            width: 100%; }
+            body main > section > div:last-of-type > div > div {
+              height: 100%;
+              width: 30%;
+              margin-top: 3em; }
+              body main > section > div:last-of-type > div > div:first-of-type {
+                padding-right: 1.5em; }
+              body main > section > div:last-of-type > div > div:last-of-type {
+                padding-left: 1.5em; }
+              body main > section > div:last-of-type > div > div ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0; }
+                body main > section > div:last-of-type > div > div ul li {
+                  display: flex;
+                  font-weight: 600;
+                  padding-bottom: .5em; }
+                  body main > section > div:last-of-type > div > div ul li span {
+                    margin-left: auto;
+                    font-weight: normal; }
+
+/*# sourceMappingURL=index.css.map */

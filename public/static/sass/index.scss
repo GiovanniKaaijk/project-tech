@@ -1,0 +1,147 @@
+//width function
+@function grid($key) {
+    @return 100% / 12 * $key;
+}
+//colors
+$colors: ( primary: #fdc552,
+secondary: #4a4949,
+);
+
+// Returns a color from the $colors-map based on the supplied key
+@function color($key) {
+    @if map-has-key($colors, $key) {
+        @return map-get($colors, $key);
+    }
+
+    @warn "Unknown `#{$key}` in $colors";
+    @return null;
+}
+
+//animation duration
+$duration: .3s;
+
+//page
+body {
+    padding: 0;
+    margin: 0;
+    font-family:'helvetica neue', sans-serif;
+    p {
+        font-size: 1em;
+    }
+    i {
+        font-size: 1.5em;
+    }
+    header {
+        border-bottom: color(primary) 1px solid;
+        display: flex;
+        margin-bottom: 3em;
+        h2 {
+            color: color(primary);
+            margin-left: 1.5em;
+            font-size: 2em;
+        }
+        nav {
+            margin-left: auto;
+            display: flex;
+            a {
+                display: flex;
+                text-decoration: none;
+                margin: auto 0;
+                i {
+                    color: color(primary);
+                }
+                &:last-of-type {
+                    margin: auto 1.5em;
+                }
+            }
+        }
+    }
+    main {
+        padding:0 4em;
+        display: flex;
+        aside {
+            display: flex;
+            width: grid(2);
+            flex-direction: column;
+            > span {
+                width: 100%;
+                height: .1em;
+                border-top: .3px solid rgba(96, 96, 96, .5);
+            }
+            ul {
+                padding-left: 0;
+                list-style-type: none;
+                li {
+                    line-height: 2em;
+                }
+            }
+        }
+        > section {
+            margin: 0 auto;
+            width: grid;
+            display: flex;
+            padding-left: 3em;
+            > div {
+                height: 100%;
+                &:first-of-type {
+                    width: 25%;
+                    height: 15em;
+                    overflow: hidden;
+                    border-radius: 10px;
+                    img {
+                        width: 100%;
+                        border-radius: 10px;
+                    }
+                }
+                &:last-of-type {
+                    width: 65%;
+                    margin-left: auto;
+                    h2 {
+                        color: color(primary);
+                        margin: 0;
+                        padding-bottom: .3em;
+                        font-size: 30px;
+                        width: 100%;
+                        border-bottom: .3px solid rgba(96, 96, 96, .5);
+                    }
+                    > div {
+                        display: flex;
+                        width: 100%;
+                        > div {
+                            height: 100%;
+                            width: 35%;
+                            margin-top: 3em;
+                            display: flex;
+                            &:first-of-type {
+                                padding-right: 1.5em;
+                            }
+                            &:last-of-type {
+                                padding-left: 1.5em;
+                            }
+                            ul {
+                                list-style-type: none;
+                                padding: 0;
+                                margin: 0;
+                                width: 50%;
+                                li {
+                                    display: flex;
+                                    font-weight: normal;
+                                    padding-bottom: .5em;
+                                    span {
+                                        margin-left: auto;
+                                        font-weight: normal;
+                                    }
+                                }
+                                &:last-of-type {
+                                    li {
+                                        font-weight: normal;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

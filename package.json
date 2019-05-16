@@ -1,0 +1,19 @@
+{
+  "name": "datingsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^4.0.1",
+    "gulp-sass": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon js/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
