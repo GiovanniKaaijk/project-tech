@@ -1,36 +1,36 @@
 html
-head
-    include partials/head.pug
-body
-    include partials/header.pug
-    main
-        aside
-            span
-            nav
-                ul
-                    li Meet new people
-                    li Chat
-                    li New matches
-        section
-            div
-                img(src=file alt="Profielfoto")
-                button(class="like") Like
-                button(class="dislike") Dislike
-            div
-                h2 Olivia
+    head
+        include partials/head.pug
+    body
+        include partials/header.pug
+        main
+            aside
+                span
+                nav
+                    ul
+                        li Meet new people
+                        li Chat
+                        li New matches
+            section
                 div
+                    img(src=file alt="Profielfoto")
+                    button(class="like") Like
+                    button(class="dislike") Dislike
+                div
+                    h2=name
                     div
-                        ul
-                            li Taal:
-                            li Afkomst:
-                            li Status:
-                            li Woonplaats:
-                        ul
-                            li Engels
-                            li Amerika
-                            li Single
-                            li Amsterdam
-                    div
-                        ul
-                            li Leeftijd:
-                            li 18
+                        div
+                            ul
+                                li Taal:
+                                li Afkomst:
+                                li Status:
+                                li Woonplaats:
+                            ul
+                                li Engels
+                                li Amerika
+                                li Single
+                                li Amsterdam
+                        div
+                            ul
+                                li Leeftijd:
+                                li 18

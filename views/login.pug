@@ -1,14 +1,12 @@
 html
-head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
-    link(rel="stylesheet" href="sass/index.css")
-    title=title
-body
-    form(action="POST" method="POST")
-        label(for="username") Gebruikersnaam
-        input(type="text" id="username")
-        label(for="password") Wachtwoord
-        input(type="password" id="password")
-        input(type="submit" placeholder="Inloggen")
+    head
+        include partials/head.pug
+    body
+        form(action="/api/data" method="POST")
+            label(for="username") Gebruikersnaam
+            input(type="text" id="username" name="name")
+            label(for="password") Wachtwoord
+            input(type="password" id="password" name="password")
+            label(for="tumbnail")
+            input(type="file" id="tumbnail" name="tumbnail")
+            input(type="submit" placeholder="Inloggen" /* disable on submit */)
