@@ -40,6 +40,7 @@ client.connect(err => {
   client.close();
 });
 
+
 // catimg
 //placeholder while fetch is still loading
 let imgsrc = 'https:\/\/purr.objects-us-east-1.dream.io\/i\/20160628_130711.jpg';
