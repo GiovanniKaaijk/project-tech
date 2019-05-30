@@ -8,4 +8,5 @@
 ## Usage
 
 Run the project: npm run dev
+
 The console will log the localhost port of the project, this should be localhost:5500

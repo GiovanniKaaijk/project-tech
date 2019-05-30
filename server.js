@@ -2,8 +2,16 @@ const express = require('express')
 const app = express()
 const port = 5500
 
-// login request
 const bodyParser = require('body-parser')
+const fetch = require('node-fetch');
+
+const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
+
+require('dotenv').config()
+
+
+// login request
 app.use(bodyParser.urlencoded({extended: false}));
 
 var data = [{
@@ -19,31 +27,30 @@ app.post('/api/data', (request, response) => {
 // multer
 
 // Mongodb
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://giovanni:giogio321@ptech-u8ivl.mongodb.net/test?retryWrites=true"
-MongoClient.connect(uri, function(err, client) {
-    if(err) {
-         console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
-    }
-    console.log('Connected...');
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
- });
-
+const uri = process.env.MONGO_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+   if(err){
+       console.log(err)
+   } else {
+       console.log('Connected to mongodb')
+   }
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 // catimg
-//placeholder while fetch is stull loading
+//placeholder while fetch is still loading
 let imgsrc = 'https:\/\/purr.objects-us-east-1.dream.io\/i\/20160628_130711.jpg';
-const fetch = require('node-fetch');
     
-    const randomCat = () => {
-    fetch('https://aws.random.cat/meow')
-    .then(res => res.json())
-    .then(json => {
-        imgsrc = json.file; 
-      });
-    };
+const randomCat = () => {
+fetch('https://aws.random.cat/meow')
+.then(res => res.json())
+.then(json => {
+    imgsrc = json.file; 
+    });
+};
 
 //routes
 app.set('view engine', 'pug')
