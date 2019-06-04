@@ -3,11 +3,19 @@ const fetch = require('node-fetch');
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt');
 const user = require('../users/user')
+
 const urlencodedParser = bodyParser.urlencoded({extended:false});
-const login = require('../users/login')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
-const OpenIDStrategy = require('passport-openid').Strategy;
+//const login = require('../users/login')
+const multer = require('multer');
+let storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, '../public/uploads/');
+     },
+    filename: function (req, file, cb) {
+        cb(null , file.originalname);
+    }
+});
+let upload = multer({ storage: storage })
 const session = require('express-session');
 routes.use(bodyParser.urlencoded({extended: false}));
 //placeholder while fetch is still loading
@@ -56,31 +64,24 @@ routes.get('/register', function (req, res) {
         message: ''
     })
 })
-// routes.get('/auth/openid', function(req, res, next) {
-//   passport.authenticate('local', function(err, user, info) {
-//     if (err) { return next(err); }
-//     if (!user) { return res.redirect('/login'); }
-//     req.logIn(user, function(err) {
-//       if (err) { return next(err); }
-//       return res.redirect('/auth/openid/redirect');
-//     });
-//   })(req, res, next);
-// });
-//used https://github.com/Createdd/Writing/blob/9f6f202750d0b91a22ddf64f6c8e9a5f4b0caeb6/2017/articles/AuthenticationIntro.md
+//upload image https://jsonworld.com/demo/upload-files-to-server-using-node.js-ejs-template-and-multer-package
 
-routes.post('/register', (req, res) => {
-    console.log(req.body)
-    sess.username = req.body.username;
-    sess.password = req.body.password;
-    
-    res.redirect('/')
-//     if (req.body.password == req.body.passwordconf) {
+routes.post('/register',upload.single('file'), (req, res) => {
+    // sess.username = req.body.username;
+    // sess.password = req.body.password;
+    try {
+        res.send(req.file);
+    } catch(err) {
+        res.send(400);
+    }
+//     if (req.body.password && req.body.username && req.body.file) {
 //         if (req.body.username && req.body.password) {
 //             console.log(req.body)
 //             let userData = {
 //                 username: req.body.username,
 //                 email: req.body.email,
-//                 password: req.body.password
+//                 password: req.body.password,
+//                 file: req.body.file
 //             }
 //             user.create(userData, (err, user) => {
 //                 if(err){
@@ -97,29 +98,7 @@ routes.post('/register', (req, res) => {
 //       return res.send('De wachtwoorden komen niet overeen')
 //   }
 });
-//used http://www.passportjs.org/docs/username-password/
-// routes.post('/auth/openid', (req, res) => {
-//   user.findOne({ email: req.body.email, password: req.body.password }, (err, User) => {
-//     Promise.resolve()
-//       .then(() => {
-//         if (err) {
-//           console.log(err)
-//           return res.status(500).send()
-//         }
-//       }).then(() => {
-//         if (!User) {
-//           return console.log('Failed to log in')
-//           res.status(404).send()
-//         } else {
-//           console.log('Logged in!')
-//           res.redirect('/dashboard')
-//           res.status(200).send()
-//         }
-//         req.session.userId = User._id
-//         console.log(req.session.userId)
-//       })
-//   })
-// })
+
 
 
 routes.use(function(req,res){

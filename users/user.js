@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  passwordconf: {
+  file: {
     type: String,
     required: false,
   }

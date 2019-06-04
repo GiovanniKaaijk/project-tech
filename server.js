@@ -10,7 +10,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const OpenIDStrategy = require('passport-openid').Strategy;
 const flash = require('connect-flash')
-const login = require('./users/login')(passport)
+//const login = require('./users/login')(passport)
 require('dotenv').config()
 // multer
 
