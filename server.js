@@ -8,6 +8,9 @@ const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
+const OpenIDStrategy = require('passport-openid').Strategy;
+const flash = require('connect-flash')
+const login = require('./users/login')(passport)
 require('dotenv').config()
 // multer
 
@@ -22,10 +25,6 @@ mongoose.connect(uri, {useCreateIndex: true ,useNewUrlParser: true })
 //routes
 app.use(express.static('public'))
 app.use(require('./routes/routes'))
-app.use(session({
-  secret: process.env.SECRET,
-  resave: true,
-  saveUninitialized: false,
-}));
+
 app.set('view engine', 'pug')
 app.listen(port, () => console.log(`Server is gestart op poort: ${port}`))
