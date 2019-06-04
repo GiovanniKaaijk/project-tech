@@ -4,9 +4,13 @@ html
     body(class="login")
         include partials/header.pug
         main
-            form(action="/login" method="POST")
+            form(action="/register" method="POST")
+                label(for="email") Email
+                input(type="text" id="email" name="email")
                 label(for="username") Gebruikersnaam
                 input(type="text" id="username" name="username")
                 label(for="password") Wachtwoord
                 input(type="password" id="password" name="password")
+                label(for="passwordconf") Bevestig wachtwoord
+                input(type="password" id="passwordconf" name="passwordconf")
                 input(type="submit" placeholder="Inloggen" /* disable on submit */)

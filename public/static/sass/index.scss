@@ -3,8 +3,9 @@
     @return 100% / 12 * $key;
 }
 //colors
-$colors: ( primary: #fdc552,
+$colors: ( primary: #fdc453,
 secondary: #4a4949,
+hover: rgba(253, 197, 82,0.8),
 );
 
 // Returns a color from the $colors-map based on the supplied key
@@ -20,41 +21,44 @@ secondary: #4a4949,
 //animation duration
 $duration: .3s;
 
-//page
+//general
 body {
     padding: 0;
     margin: 0;
     font-family:'helvetica neue', sans-serif;
+}
+header {
+    border-bottom: color(primary) 1px solid;
+    display: flex;
+    margin-bottom: 3em;
+    h2 {
+        color: color(primary);
+        margin-left: 1.5em;
+        font-size: 2em;
+    }
+    nav {
+        margin-left: auto;
+        display: flex;
+        a {
+            display: flex;
+            text-decoration: none;
+            margin: auto 0;
+            i {
+                color: color(primary);
+            }
+            &:last-of-type {
+                margin: auto 1.5em;
+            }
+        }
+    }
+}
+//page
+.index {
     p {
         font-size: 1em;
     }
     i {
         font-size: 1.5em;
-    }
-    header {
-        border-bottom: color(primary) 1px solid;
-        display: flex;
-        margin-bottom: 3em;
-        h2 {
-            color: color(primary);
-            margin-left: 1.5em;
-            font-size: 2em;
-        }
-        nav {
-            margin-left: auto;
-            display: flex;
-            a {
-                display: flex;
-                text-decoration: none;
-                margin: auto 0;
-                i {
-                    color: color(primary);
-                }
-                &:last-of-type {
-                    margin: auto 1.5em;
-                }
-            }
-        }
     }
     main {
         padding:0 4em;
@@ -143,5 +147,54 @@ body {
                 }
             }
         }
+    }
+}
+.login {
+    header{
+        margin-bottom: 0;
+    }
+    main {
+    background-color: color(primary);
+    display: flex;
+    height:100%;
+    margin-top: 3em;
+    }
+    
+    form {
+        margin: auto;
+        padding: 3em 5em;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        input:not([type="file"]) {
+            border: 1px solid rgba(96, 96, 96, .5);
+            border-radius: 2px;
+            padding: .4em .5em;
+
+        }
+        input:not(:last-child){
+            margin-bottom: 2em;
+        }
+        input[type="submit"] {
+            background-color: color(primary);
+            border-radius: 5px;
+            border: none;
+            padding: 1em 2em;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color $duration;
+            cursor: pointer;
+            &:hover {
+                background-color: color(hover);
+            }
+        }
+        label {
+            padding-bottom: .3em;
+        }
+    }
+    header i {
+        color: #fff;
     }
 }
