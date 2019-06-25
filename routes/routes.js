@@ -1,15 +1,23 @@
 const routes = require('express').Router()
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt');
 const user = require('../users/user')
 const urlencodedParser = bodyParser.urlencoded({extended:false});
 const login = require('../users/login')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
-const OpenIDStrategy = require('passport-openid').Strategy;
 const session = require('express-session');
+const mongoose = require('mongoose');
+const multer = require('multer');
 routes.use(bodyParser.urlencoded({extended: false}));
+//multer
+let storage = multer.diskStorage({
+    destination:  (req, file, cb) => {
+        cb(null, path.join(__dirname, '../public/uploads/'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString().replace() + file.originalname)
+    }
+});
+const upload = multer({ storage:storage })
 //placeholder while fetch is still loading
 let imgsrc = 'https:\/\/purr.objects-us-east-1.dream.io\/i\/20160628_130711.jpg';
 
@@ -32,7 +40,7 @@ routes.use(session({
   resave: true
 }));
 let sess;
-routes.get('/', function (req, res) {
+routes.get('/', (req, res) => {
     sess = req.session;
     randomCat()
     res.render('index', {
@@ -42,85 +50,48 @@ routes.get('/', function (req, res) {
     })
 })
 
-routes.get('/login', function (req, res) {
+routes.get('/login', (req, res) => {
     sess = req.session;
     res.render('login', {
         title: '-',
         message: ''
     })
 })
-routes.get('/register', function (req, res) {
+routes.get('/register', upload.single('file'), (req, res) => {
     sess = req.session;
     res.render('register', {
         title: '-',
         message: ''
     })
 })
-// routes.get('/auth/openid', function(req, res, next) {
-//   passport.authenticate('local', function(err, user, info) {
-//     if (err) { return next(err); }
-//     if (!user) { return res.redirect('/login'); }
-//     req.logIn(user, function(err) {
-//       if (err) { return next(err); }
-//       return res.redirect('/auth/openid/redirect');
-//     });
-//   })(req, res, next);
-// });
-//used https://github.com/Createdd/Writing/blob/9f6f202750d0b91a22ddf64f6c8e9a5f4b0caeb6/2017/articles/AuthenticationIntro.md
 
-routes.post('/register', (req, res) => {
+routes.post('/register', upload.single('file'), (req, res) => {
     console.log(req.body)
-    sess.username = req.body.username;
-    sess.password = req.body.password;
-    
     res.redirect('/')
-//     if (req.body.password == req.body.passwordconf) {
-//         if (req.body.username && req.body.password) {
-//             console.log(req.body)
-//             let userData = {
-//                 username: req.body.username,
-//                 email: req.body.email,
-//                 password: req.body.password
-//             }
-//             user.create(userData, (err, user) => {
-//                 if(err){
-//                     console.log(err)
-//                 } else {
-//                     return res.redirect('http://localhost:9090/')
-//                 }
-//             })
-//         } else {
-//             console.log('Vul alle velden in')
-//         }
-//   } else {
-//       console.log('password is niet gelijk')
-//       return res.send('De wachtwoorden komen niet overeen')
-//   }
+    if (req.body.password == req.body.passwordconf) {
+        if (req.body.username && req.body.password) {
+            console.log(req.body)
+            let userData = {
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                profilePic: req.file ? ('/upload/' + req.file.filename) ? undefined,
+            }
+            user.create(userData, (err, user) => {
+                if(err){
+                    console.log(err)
+                } else {
+                    return res.redirect('http://localhost:9090/')
+                }
+            })
+        } else {
+            console.log('Vul alle velden in')
+        }
+  } else {
+      console.log('password is niet gelijk')
+      return res.send('De wachtwoorden komen niet overeen')
+  }
 });
-//used http://www.passportjs.org/docs/username-password/
-// routes.post('/auth/openid', (req, res) => {
-//   user.findOne({ email: req.body.email, password: req.body.password }, (err, User) => {
-//     Promise.resolve()
-//       .then(() => {
-//         if (err) {
-//           console.log(err)
-//           return res.status(500).send()
-//         }
-//       }).then(() => {
-//         if (!User) {
-//           return console.log('Failed to log in')
-//           res.status(404).send()
-//         } else {
-//           console.log('Logged in!')
-//           res.redirect('/dashboard')
-//           res.status(200).send()
-//         }
-//         req.session.userId = User._id
-//         console.log(req.session.userId)
-//       })
-//   })
-// })
-
 
 routes.use(function(req,res){
         res.status(404).render('404.pug', {
