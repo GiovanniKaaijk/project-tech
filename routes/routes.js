@@ -1,23 +1,23 @@
 const routes = require('express').Router()
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt');
 const user = require('../users/user')
-
 const urlencodedParser = bodyParser.urlencoded({extended:false});
-//const login = require('../users/login')
+const login = require('../users/login')
+const session = require('express-session');
+const mongoose = require('mongoose');
 const multer = require('multer');
+routes.use(bodyParser.urlencoded({extended: false}));
+//multer
 let storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, '../public/uploads/');
-     },
-    filename: function (req, file, cb) {
-        cb(null , file.originalname);
+    destination:  (req, file, cb) => {
+        cb(null, path.join(__dirname, '../public/uploads/'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString().replace() + file.originalname)
     }
 });
-let upload = multer({ storage: storage })
-const session = require('express-session');
-routes.use(bodyParser.urlencoded({extended: false}));
+const upload = multer({ storage:storage })
 //placeholder while fetch is still loading
 let imgsrc = 'https:\/\/purr.objects-us-east-1.dream.io\/i\/20160628_130711.jpg';
 
@@ -40,7 +40,7 @@ routes.use(session({
   resave: true
 }));
 let sess;
-routes.get('/', function (req, res) {
+routes.get('/', (req, res) => {
     sess = req.session;
     randomCat()
     res.render('index', {
@@ -50,56 +50,48 @@ routes.get('/', function (req, res) {
     })
 })
 
-routes.get('/login', function (req, res) {
+routes.get('/login', (req, res) => {
     sess = req.session;
     res.render('login', {
         title: '-',
         message: ''
     })
 })
-routes.get('/register', function (req, res) {
+routes.get('/register', upload.single('file'), (req, res) => {
     sess = req.session;
     res.render('register', {
         title: '-',
         message: ''
     })
 })
-//upload image https://jsonworld.com/demo/upload-files-to-server-using-node.js-ejs-template-and-multer-package
 
-routes.post('/register',upload.single('file'), (req, res) => {
-    // sess.username = req.body.username;
-    // sess.password = req.body.password;
-    try {
-        res.send(req.file);
-    } catch(err) {
-        res.send(400);
-    }
-//     if (req.body.password && req.body.username && req.body.file) {
-//         if (req.body.username && req.body.password) {
-//             console.log(req.body)
-//             let userData = {
-//                 username: req.body.username,
-//                 email: req.body.email,
-//                 password: req.body.password,
-//                 file: req.body.file
-//             }
-//             user.create(userData, (err, user) => {
-//                 if(err){
-//                     console.log(err)
-//                 } else {
-//                     return res.redirect('http://localhost:9090/')
-//                 }
-//             })
-//         } else {
-//             console.log('Vul alle velden in')
-//         }
-//   } else {
-//       console.log('password is niet gelijk')
-//       return res.send('De wachtwoorden komen niet overeen')
-//   }
+routes.post('/register', upload.single('file'), (req, res) => {
+    console.log(req.body)
+    res.redirect('/')
+    if (req.body.password == req.body.passwordconf) {
+        if (req.body.username && req.body.password) {
+            console.log(req.body)
+            let userData = {
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                profilePic: req.file ? ('/upload/' + req.file.filename) ? undefined,
+            }
+            user.create(userData, (err, user) => {
+                if(err){
+                    console.log(err)
+                } else {
+                    return res.redirect('http://localhost:9090/')
+                }
+            })
+        } else {
+            console.log('Vul alle velden in')
+        }
+  } else {
+      console.log('password is niet gelijk')
+      return res.send('De wachtwoorden komen niet overeen')
+  }
 });
-
-
 
 routes.use(function(req,res){
         res.status(404).render('404.pug', {
