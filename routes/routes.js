@@ -6,6 +6,10 @@ const urlencodedParser = bodyParser.urlencoded({extended:false});
 const login = require('../users/login')
 const session = require('express-session');
 const mongoose = require('mongoose');
+const login = require('../users/login')
+const login = require('../users/login')
+const multer = require('multer');
+routes.use(bodyParser.urlencoded({extended: false}));
 const multer = require('multer');
 routes.use(bodyParser.urlencoded({extended: false}));
 //multer
