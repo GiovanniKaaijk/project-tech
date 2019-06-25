@@ -7,6 +7,13 @@ const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session')
 const passport = require('passport')
+<<<<<<< HEAD
+=======
+const LocalStrategy = require('passport-local').Strategy;
+const OpenIDStrategy = require('passport-openid').Strategy;
+const flash = require('connect-flash')
+//const login = require('./users/login')(passport)
+>>>>>>> cc0fcdde7d030ea604944517a39a4823ae5f54d4
 require('dotenv').config()
 // multer
 

@@ -2,8 +2,23 @@ const routes = require('express').Router()
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser')
 const user = require('../users/user')
+
 const urlencodedParser = bodyParser.urlencoded({extended:false});
+<<<<<<< HEAD
 const login = require('../users/login')
+=======
+//const login = require('../users/login')
+const multer = require('multer');
+let storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, '../public/uploads/');
+     },
+    filename: function (req, file, cb) {
+        cb(null , file.originalname);
+    }
+});
+let upload = multer({ storage: storage })
+>>>>>>> cc0fcdde7d030ea604944517a39a4823ae5f54d4
 const session = require('express-session');
 const mongoose = require('mongoose');
 const multer = require('multer');
