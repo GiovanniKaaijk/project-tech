@@ -1,15 +1,10 @@
 const express = require('express')
 const app = express()
-const port = 9090
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
-const OpenIDStrategy = require('passport-openid').Strategy;
-const flash = require('connect-flash')
 //const login = require('./users/login')(passport)
 require('dotenv').config()
 // multer
@@ -41,4 +36,6 @@ app.use(profile);
 app.use(users);
 app.use(like);
 app.set('view engine', 'pug')
+
+const port = process.env.PORT || 9090
 app.listen(port, () => console.log(`Server is gestart op poort: ${port}`))
