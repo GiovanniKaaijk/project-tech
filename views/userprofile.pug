@@ -1,16 +1,21 @@
 html
     head
         include partials/head.pug
-    body(class="Userprofile")
+    body(class="profile")
         include partials/header.pug
         main
-            form(action="/register" method="POST")
-                label(for="email") Email
-                input(type="text" id="email" name="email")
-                label(for="username") Gebruikersnaam
-                input(type="text" id="username" name="username")
-                label(for="password") Wachtwoord
-                input(type="password" id="password" name="password")
-                label(for="file") Profielfoto
-                input(type="file" id="file" name="file")
-                input(type="submit" placeholder="Inloggen" /* disable on submit */)
+            h2= liked
+            if liked === false
+                h2 Like dit persoon
+                p Geef #{data.username} een like met de onderstaande knop.
+                form(class="hidden-input" action="/like" method="POST")
+                    input(type="text" name="id" value=`${data._id}`)
+                    button(type="submit") Like
+            else
+                p Jullie hebben elkaar geliked.
+                a(href='mailto:'+`${data._email}`) Neem contact op!
+                h3 Dislike?
+                p Dislike #{data.username} met de onderstaande knop.
+                form(class="hidden-input" action="/dislike" method="POST")
+                    input(type="text" name="userid" value=`${data._id}`)
+                    button(type="submit") Dislike

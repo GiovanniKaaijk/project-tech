@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../controls/userschema');
+const User = require('../controls/userSchema');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({
@@ -23,7 +23,7 @@ router.post('/like', (req, res) => {
                     if(userId == foundObject.likes[i]){
                         console.log('You already liked this user');
                         res.status(200).send()
-                        res.redirect('/matches')
+                        res.redirect('/users')
                         return
                     }
                 }
@@ -33,8 +33,9 @@ router.post('/like', (req, res) => {
                         console.log(err)
                         res.status(500).send()
                     } else {
+                        console.log(foundObject.likes)
                         res.status(200).send()
-                        res.redirect('/matches')
+                        res.redirect('/users')
                     }
                 })
             }
@@ -67,7 +68,7 @@ router.post('/dislike',(req, res) => {
                     } else {
                         console.log('user saved' + updatedObject)
                         res.status(200).send()
-                        res.redirect('matches')
+                        res.redirect('/users')
                     }
                 })
             }

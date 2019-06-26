@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
+let userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
@@ -24,5 +24,5 @@ const userSchema = new mongoose.Schema({
   profilePic: String,
 });
 
-let user = mongoose.model('User', userSchema);
-module.exports = user;
+let User = mongoose.model('User', userSchema);
+module.exports = User;

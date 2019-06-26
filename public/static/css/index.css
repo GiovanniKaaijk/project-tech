@@ -1,0 +1,245 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'helvetica neue', sans-serif;
+}
+
+header {
+  border-bottom: #fdc453 1px solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 3em;
+}
+
+header h2 {
+  color: #fdc453;
+  margin-left: 1.5em;
+  font-size: 2em;
+}
+
+header nav {
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+header nav a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none;
+  margin: auto 0;
+}
+
+header nav a i {
+  color: #fdc453;
+}
+
+header nav a:last-of-type {
+  margin: auto 1.5em;
+}
+
+.index p {
+  font-size: 1em;
+}
+
+.index i {
+  font-size: 1.5em;
+}
+
+.index main {
+  padding: 0 4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.index main aside {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 16.66667%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.index main aside > span {
+  width: 100%;
+  height: .1em;
+  border-top: 0.3px solid rgba(96, 96, 96, 0.5);
+}
+
+.index main aside ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.index main aside ul li {
+  line-height: 2em;
+}
+
+.index main > section {
+  margin: 0 auto;
+  width: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 3em;
+}
+
+.index main > section > div {
+  height: 100%;
+}
+
+.index main > section > div:first-of-type {
+  width: 25%;
+  height: 15em;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.index main > section > div:first-of-type img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.index main > section > div:last-of-type {
+  width: 65%;
+  margin-left: auto;
+}
+
+.index main > section > div:last-of-type h2 {
+  color: #fdc453;
+  margin: 0;
+  padding-bottom: .3em;
+  font-size: 30px;
+  width: 100%;
+  border-bottom: 0.3px solid rgba(96, 96, 96, 0.5);
+}
+
+.index main > section > div:last-of-type > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.index main > section > div:last-of-type > div > div {
+  height: 100%;
+  width: 35%;
+  margin-top: 3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.index main > section > div:last-of-type > div > div:first-of-type {
+  padding-right: 1.5em;
+}
+
+.index main > section > div:last-of-type > div > div:last-of-type {
+  padding-left: 1.5em;
+}
+
+.index main > section > div:last-of-type > div > div ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 50%;
+}
+
+.index main > section > div:last-of-type > div > div ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: normal;
+  padding-bottom: .5em;
+}
+
+.index main > section > div:last-of-type > div > div ul li span {
+  margin-left: auto;
+  font-weight: normal;
+}
+
+.index main > section > div:last-of-type > div > div ul:last-of-type li {
+  font-weight: normal;
+}
+.login main {
+  background-color: #fdc453;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  padding-top: 3em;
+}
+
+.login header {
+  margin-bottom: 0;
+}
+
+.login main form {
+  margin: auto;
+  padding: 3em 5em;
+  border-radius: 10px;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.login main form input:not([type="file"]) {
+  border: 1px solid rgba(96, 96, 96, 0.5);
+  border-radius: 2px;
+  padding: .4em .5em;
+}
+
+.login main form input:not(:last-child) {
+  margin-bottom: 2em;
+}
+
+.login main form input[type="submit"] {
+  background-color: #fdc453;
+  border-radius: 5px;
+  border: none;
+  padding: 1em 2em;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1em;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.login main form input[type="submit"]:hover {
+  background-color: rgba(253, 197, 82, 0.8);
+}
+
+.login main form label {
+  padding-bottom: .3em;
+}
+
+.login main header i {
+  color: #fff;
+}
+
+.profile img {
+  width: 250px;
+}
+.profile main {
+  display: flex;
+}
+.profile main div {
+  margin: 0 auto;
+  width: 80vw;
+}
+.hidden-input input {
+  display: none;
+}

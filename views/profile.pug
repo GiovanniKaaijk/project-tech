@@ -1,0 +1,9 @@
+html
+    head
+        include partials/head.pug
+    body(class="profile")
+        include partials/header.pug
+        main
+            div
+                img(src=`${data.profilePic}` alt="Profielfoto")
+                h2= `${data.username}`

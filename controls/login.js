@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../controls/userschema');
+const User = require('../controls/userSchema');
 const session = require('express-session');
 
 router.post('/login', (req, res, next) => {
@@ -15,6 +15,7 @@ router.post('/login', (req, res, next) => {
       res.redirect(`/profile/${req.session.user._id}`)
     } else {
       console.log('incorrect')
+      res.redirect('/login')
     }
   });
 });

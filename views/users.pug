@@ -1,0 +1,11 @@
+html
+    head
+        include partials/head.pug
+    body(class="profile")
+        include partials/header.pug
+        main
+            div
+                each val in profiles
+                    a(class="user" href='/userprofile/'+`${val._id}`)
+                        img(src=`${val.profilePic}`, alt="")
+                        h3= val.username
