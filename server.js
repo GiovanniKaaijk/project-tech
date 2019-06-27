@@ -1,16 +1,14 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session')
-//const login = require('./users/login')(passport)
 require('dotenv').config()
 // multer
 
 app.use(session({
-    secret: 'sessie',
+    secret: 'session',
     resave: false,
     saveUninitialized: true,
 }));

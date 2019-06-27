@@ -12,7 +12,6 @@ router.get('/profile/:id', (req, res) => {
         if (err) {
             throw(err);
         } else {
-            console.log(profile);
             res.render('profile', {data: profile, user: req.session.user})
         }
     });

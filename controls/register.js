@@ -19,9 +19,7 @@ let storage = multer.diskStorage({
 const upload = multer({ storage:storage })
 
 routes.post('/register', upload.single('file'), (req, res) => {
-    console.log(req.body)
         if (req.body.username && req.body.password) {
-            console.log(req.body)
             let userData = {
                 username: req.body.username,
                 email: req.body.email,
