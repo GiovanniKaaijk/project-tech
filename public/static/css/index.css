@@ -168,12 +168,15 @@ header nav a:last-of-type {
 .index main > section > div:last-of-type > div > div ul:last-of-type li {
   font-weight: normal;
 }
+.login {
+  overflow-y: hidden;
+}
 .login main {
   background-color: #fdc453;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 100%;
+  height: 85%;
   padding-top: 3em;
 }
 
@@ -182,7 +185,8 @@ header nav a:last-of-type {
 }
 
 .login main form {
-  margin: auto;
+  width:230px;
+  margin: 100px auto auto;
   padding: 3em 5em;
   border-radius: 10px;
   background-color: #fff;
@@ -242,4 +246,62 @@ header nav a:last-of-type {
 }
 .hidden-input input {
   display: none;
+}
+.profile main div {
+  display: flex;
+}
+.profile main div div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+.profile main div h2 {
+  margin-top: 0;
+}
+i {
+  font-size: 25px;
+}
+.profiles main div {
+  display: flex;
+}
+.profiles main div a:not(:first-child) {
+  margin-left: 30px;
+}
+.profiles main div a {
+  width: 250px;
+  text-decoration: none;
+  color: black;
+}
+.profiles main div h2 {
+  margin-top: 0;
+}
+.profiles main img {
+  height: auto;
+  width: 100%;
+}
+.userprofile main {
+  display: flex;
+  margin: 0 auto;
+  width: 80vw;
+  flex-direction: column;
+}
+.userprofile main button {
+  background-color: #fdc453;
+  border-radius: 5px;
+  border: none;
+  padding: 1em 2em;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1em;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.userprofile main button:hover {
+  background-color: rgba(253, 197, 82, 0.8);
+}
+.profiles main {
+  width: 80vw;
+  margin: 0 auto;
 }

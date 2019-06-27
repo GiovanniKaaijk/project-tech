@@ -1,10 +1,9 @@
 html
     head
         include partials/head.pug
-    body(class="profile")
+    body(class="userprofile")
         include partials/header.pug
         main
-            h2= liked
             if liked === false
                 h2 Like dit persoon
                 p Geef #{data.username} een like met de onderstaande knop.
@@ -12,10 +11,18 @@ html
                     input(type="text" name="id" value=`${data._id}`)
                     button(type="submit") Like
             else
-                p Jullie hebben elkaar geliked.
-                a(href='mailto:'+`${data._email}`) Neem contact op!
-                h3 Dislike?
-                p Dislike #{data.username} met de onderstaande knop.
-                form(class="hidden-input" action="/dislike" method="POST")
-                    input(type="text" name="userid" value=`${data._id}`)
-                    button(type="submit") Dislike
+                if match === true
+                    p Jullie hebben elkaar geliked.
+                    a(href='mailto:'+`${data._email}`) Neem contact op!
+                    h3 Dislike?
+                    p Dislike #{data.username} met de onderstaande knop.
+                    form(class="hidden-input" action="/dislike" method="POST")
+                        input(type="text" name="userid" value=`${data._id}`)
+                        button(type="submit") Dislike
+                else
+                    p Je hebt dit persoon al geliked.
+                    h3 Dislike?
+                    p Dislike #{data.username} met de onderstaande knop.
+                    form(class="hidden-input" action="/dislike" method="POST")
+                        input(type="text" name="userid" value=`${data._id}`)
+                        button(type="submit") Dislike
