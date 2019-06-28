@@ -46,7 +46,6 @@ router.post('/like', (req, res) => {
 router.post('/dislike',(req, res) => {
     const id = req.session.user._id;
     const userId = req.body.userid
-    console.log(userId)
     User.findOne({ _id: id }, (err, foundObject) => {
         if (err) {
             console.log(err)
@@ -59,14 +58,13 @@ router.post('/dislike',(req, res) => {
                 const userIndex = foundObject.likes.indexOf(userId);
                 if(userIndex > -1) {
                     foundObject.likes.splice(userIndex, 1);
-                    console.log(foundObject.likes)
                 }
                 foundObject.save((err, updatedObject) => {
                     if (err) {
                         console.log(err)
                         res.status(500).send()
                     } else {
-                        console.log('user saved' + updatedObject)
+                        console.log('user saved ' + updatedObject)
                         res.status(200).send()
                         res.redirect('/users')
                     }

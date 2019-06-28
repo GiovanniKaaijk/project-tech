@@ -305,3 +305,6 @@ i {
   width: 80vw;
   margin: 0 auto;
 }
+.profile img {
+  border-radius: 8px;
+}
