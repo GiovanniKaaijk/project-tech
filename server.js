@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
 const session = require('express-session')
 require('dotenv').config()
 // multer
@@ -21,19 +19,13 @@ mongoose.connect(uri, {useCreateIndex: true ,useNewUrlParser: true })
 
 //route usage
 const register = require('./controls/register');
-const login = require('./controls/login');
-const profile = require('./controls/profile');
-const users = require('./controls/users');
-const like = require('./controls/like');
+const update = require('./controls/edit')
 //routes
 app.use(express.static('public'))
-app.use(require('./routes/routes'))
-app.use(register);
-app.use(login);
-app.use(profile);
-app.use(users);
-app.use(like);
-app.set('view engine', 'pug')
+    .use(require('./routes/routes'))
+    .use(register)
+    .use(update)
+    .set('view engine', 'pug')
 
 const port = process.env.PORT || 9090
 app.listen(port, () => console.log(`Server is gestart op poort: ${port}`))

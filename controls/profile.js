@@ -1,9 +1,6 @@
-const express = require('express');
-const router = express.Router();
 const User = require('../controls/userSchema');
-const session = require('express-session');
-//teamproject
-router.get('/profile/:id', (req, res) => {
+
+function profilePage(req, res) {
     if (!req.session.user) {
         res.redirect('/login');
         return
@@ -12,13 +9,13 @@ router.get('/profile/:id', (req, res) => {
         if (err) {
             throw(err);
         } else {
-            res.render('profile', {data: profile, user: req.session.user})
+            res.render('profile', {data: profile, user: req.session.user, id: req.session.user._id})
         }
     });
-});
+}
 
-//zelf gemaakt in teamproject
-router.get('/userprofile/:id', (req, res) => {
+
+function userProfile(req, res) {
     if (!req.session.user) {
         res.redirect('/login');
         return
@@ -46,10 +43,14 @@ router.get('/userprofile/:id', (req, res) => {
                             }
                         }
                         console.log(like, match);
-                    res.render('userprofile', {data: profile, user: userProfile, liked: like, match: match})
+                    res.render('userprofile', {data: profile, user: userProfile, liked: like, match: match, id: req.session.user._id})
                 }
             })
         }
     });
-});
-module.exports = router;
+};
+
+module.exports = {
+    userProfile: userProfile, 
+    profilePage: profilePage
+};

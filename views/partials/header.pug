@@ -1,7 +1,8 @@
 header
     h2 Studating
     nav
+        if id
+            a(href=`/profile/${id}`)
+                i(class="far fa-user")
         a(href="/users")
-            i(class="far fa-user")
-        a(href="")
             i(class="far fa-comment")

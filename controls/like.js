@@ -1,15 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../controls/userSchema');
-const session = require('express-session');
-const bodyParser = require('body-parser');
+const express = require('express')
+const router = express.Router()
+const User = require('../controls/userSchema')
+const bodyParser = require('body-parser')
 router.use(bodyParser.urlencoded({
     extended: true
-}));
+}))
 
-router.post('/like', (req, res) => {
-    const id = req.session.user._id;
-    const userId = req.body.id;
+function like(req, res) {
+    const id = req.session.user._id
+    const userId = req.body.id
     User.findOne({ _id: id }, (err, foundObject) => {
         if (err) {
             console.log(err)
@@ -19,14 +18,14 @@ router.post('/like', (req, res) => {
                 console.log('User not found in database')
                 res.status(404).send()
             } else {
-                for(let i =0; i<foundObject.likes.length;i++) {
-                    if(userId == foundObject.likes[i]){
-                        console.log('You already liked this user');
+                foundObject.likes.forEach(like => {
+                    if(userId == like){
+                        console.log('You already liked this user')
                         res.status(200).send()
-                        res.redirect('/users')
+                        res.redirect(`/userprofile/${userId}`)
                         return
                     }
-                }
+                })
                 foundObject.likes.push(userId)
                 foundObject.save((err, updatedObject) => {
                     if (err) {
@@ -35,16 +34,16 @@ router.post('/like', (req, res) => {
                     } else {
                         console.log(foundObject.likes)
                         res.status(200).send()
-                        res.redirect('/users')
+                        res.redirect(`/userprofile/${userId}`)
                     }
                 })
             }
         }
     })
-});
+}
 
-router.post('/dislike',(req, res) => {
-    const id = req.session.user._id;
+function dislike(req, res) {
+    const id = req.session.user._id
     const userId = req.body.userid
     User.findOne({ _id: id }, (err, foundObject) => {
         if (err) {
@@ -55,9 +54,9 @@ router.post('/dislike',(req, res) => {
                 console.log('User not found in database')
                 res.status(404).send()
             } else {
-                const userIndex = foundObject.likes.indexOf(userId);
+                const userIndex = foundObject.likes.indexOf(userId)
                 if(userIndex > -1) {
-                    foundObject.likes.splice(userIndex, 1);
+                    foundObject.likes.splice(userIndex, 1)
                 }
                 foundObject.save((err, updatedObject) => {
                     if (err) {
@@ -66,13 +65,15 @@ router.post('/dislike',(req, res) => {
                     } else {
                         console.log('user saved ' + updatedObject)
                         res.status(200).send()
-                        res.redirect('/users')
+                        res.redirect(`/userprofile/${userId}`)
                     }
                 })
             }
         }
     })
 }
-);
 
-module.exports = router;
+module.exports = {
+    like: like,
+    dislike: dislike
+}
