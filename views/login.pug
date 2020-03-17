@@ -7,6 +7,8 @@ html
             form(action="/login" method="POST")
                 label(for="email") Email
                 input(type="text" id="email" name="email")
-                label(for="password") Wachtwoord
+                label(for="password") Password
                 input(type="password" id="password" name="password")
                 input(type="submit" placeholder="Inloggen" /* disable on submit */)
+
+                a(href="/register") New? Register
