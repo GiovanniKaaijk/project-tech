@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage })
 
 router.post('/updateProfile', upload.single('profilePic'), (req, res) => {
-  console.log('running');
   const id = req.session.user._id
   User.findOne({ _id: id }, (err, foundObject) => {
     if (err) {
@@ -26,7 +25,6 @@ router.post('/updateProfile', upload.single('profilePic'), (req, res) => {
         console.log('User not found in database')
         res.status(404).send()
       } else {
-        console.log('user found: ', foundObject)
         console.log('request body:', req.body)
         if (req.body.username) {
           foundObject.username = req.body.username

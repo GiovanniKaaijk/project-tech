@@ -1,19 +1,19 @@
 const routes = require('express').Router()
 const bodyParser = require('body-parser')
-const user = require('../controls/userSchema');
-const urlencodedParser = bodyParser.urlencoded({extended:false});
-const multer = require('multer');
-const path = require('path');
-routes.use(bodyParser.urlencoded({extended: false}));
+const user = require('../controls/userSchema')
+const urlencodedParser = bodyParser.urlencoded({extended:false})
+const multer = require('multer')
+const path = require('path')
+routes.use(bodyParser.urlencoded({extended: false}))
 
 const storage = multer.diskStorage({
     destination:  (req, file, cb) => {
-        cb(null, path.join(__dirname, '../public/uploads/'));
+        cb(null, path.join(__dirname, '../public/uploads/'))
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().slice(0, 10) + file.originalname)
     }
-});
+})
 const upload = multer({ storage:storage })
 
 routes.post('/register', upload.single('file'), (req, res) => {
@@ -28,13 +28,13 @@ routes.post('/register', upload.single('file'), (req, res) => {
                 if(err){
                     console.log(err)
                 } else {
-                    req.session.user = userData;
+                    req.session.user = userData
                     res.redirect(`/profile/${user._id}`)
                 }
             })
         } else {
             console.log('Vul alle velden in')
   }
-});
+})
 
-module.exports = routes;
+module.exports = routes

@@ -2,6 +2,7 @@ const routes = require('express').Router()
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({extended:false})
 const multer = require('multer')
+const user = require('../controls/userSchema')
 
 const profilePages = require('../controls/profile')
 const likes = require('../controls/like')
@@ -48,6 +49,23 @@ routes.get('/update', (req, res) => {
     console.log(req.session.user)
     res.render('update', {user: req.session.user, id: req.session.user._id});
 });
+
+routes.get('/delete', (req, res) => {
+    if (!req.session.user){
+        res.redirect('/login');
+        return
+      }
+    const id = req.session.user._id
+    user.deleteOne({ _id: id }, (err) => {
+        if (err) {
+            console.log(err)
+            res.status(500).send()
+        } else {
+            res.status(200).send()
+            res.redirect('/login')
+        }
+    })
+})
 
 routes.get('/profile/:id', profilePages.profilePage)
 routes.get('/userprofile/:id', profilePages.userProfile)
