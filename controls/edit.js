@@ -35,7 +35,6 @@ router.post('/updateProfile', upload.single('profilePic'), (req, res) => {
         } if (req.body.password) {
           foundObject.password = req.body.password
         } if (req.file) {
-            console.log('test')
           foundObject.profilePic = ('/uploads/' + req.file.filename)
         }
         req.session.user = foundObject

@@ -46,7 +46,7 @@ routes.get('/update', (req, res) => {
       return
     }
     console.log(req.session.user)
-    res.render('update', {user: req.session.user});
+    res.render('update', {user: req.session.user, id: req.session.user._id});
 });
 
 routes.get('/profile/:id', profilePages.profilePage)
