@@ -68,6 +68,8 @@ npm run dev
 - Session
 - Like other users
 - Match with other users
+- Edit your profile
+- Delete your profile
 
 ## Usage
 Start the application
