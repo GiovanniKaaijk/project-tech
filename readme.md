@@ -52,7 +52,7 @@ Create an .ENV file
 ```
 Touch .env
 fill in the following:
-MONGO_URI= -Your connection URI to mongo-
+MONGO_URI= -Your connection URI to mongo- Example: "mongodb+srv://{username}:{password}@ptech-u8ivl.mongodb.net/test?retryWrites=true&w=majority"
 PORT= -any port you like, I used 9090 for this project-  
 SECRET= -secure session cookies-
 ```

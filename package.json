@@ -23,5 +23,5 @@
     "dev": "nodemon server.js"
   },
   "author": "Giovanni Kaaijk",
-  "license": "ISC"
+  "license": "MIT"
 }
