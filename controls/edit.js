@@ -16,6 +16,7 @@ const upload = multer({ storage:storage })
 
 router.post('/updateProfile', upload.single('profilePic'), (req, res) => {
   const id = req.session.user._id
+  console.log(id)
   User.findOne({ _id: id }, (err, foundObject) => {
     if (err) {
       console.log(err)
@@ -27,7 +28,7 @@ router.post('/updateProfile', upload.single('profilePic'), (req, res) => {
       } else {
         console.log('request body:', req.body)
         if (req.body.username) {
-          foundObject.username = req.body.username
+          foundObject.username = req.body.username 
         } if (req.body.email) {
           foundObject.email = req.body.email
         } if (req.body.password) {

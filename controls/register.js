@@ -28,8 +28,7 @@ routes.post('/register', upload.single('file'), (req, res) => {
                 if(err){
                     console.log(err)
                 } else {
-                    req.session.user = userData
-                    res.redirect(`/profile/${user._id}`)
+                    res.redirect(`/login`)
                 }
             })
         } else {
